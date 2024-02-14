@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 042c3ccec534cf041999cc115346a844, type: 3}
+  m_Name: Story_005
+  m_EditorClassIdentifier: 
+  storyNumber: 5
+  storyDone: 0
+  storyText: "\uAC04\uB2E8 \uC774\uBCA4\uD2B8 \uD14C\uC2A4\uD2B8"
+  options:
+  - optionText: "\uC774\uB3D9\uD55C\uB2E4"
+    buttonText: 
+    effects:
+    - effectType: 1
+      value: 1
+    - effectType: 2
+      value: 1
+  - optionText: "\uB3C4\uB9DD\uAC04\uB2E4"
+    buttonText: 
+    effects:
+    - effectType: 0
+      value: -1
+    - effectType: 2
+      value: 1
