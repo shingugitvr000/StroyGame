@@ -84,10 +84,12 @@ public class GameSystem : MonoBehaviour
                 currentHpPoint += effect.value;
                 break;
             case StoryModel.Effect.EffectType.AddExperience:
-                // 경험치 증가 로직을 추가하세요
+                
                 break;
             case StoryModel.Effect.EffectType.GoToNextStory:
-                // 다음 스토리로 이동하는 로직을 추가하세요
+                currentStoryIndex = effect.value;
+                ChangeState(GAMESTATE.STORYSHOW);
+
                 break;
             default:
                 Debug.LogError("Unknown effect type");
@@ -116,7 +118,7 @@ public class GameSystem : MonoBehaviour
 
     StoryModel FindStoryModel(int number)
     {
-        StoryModel tempStoryModels = new StoryModel();
+        StoryModel tempStoryModels = null;
         for (int i = 0; i < storyModels.Length; i++)
         {
             if (storyModels[i].storyNumber == number)
