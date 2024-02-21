@@ -17,16 +17,16 @@ MonoBehaviour:
   storyText: "\uAC04\uB2E8 \uC774\uBCA4\uD2B8 \uD14C\uC2A4\uD2B8"
   options:
   - optionText: "\uC774\uB3D9\uD55C\uB2E4"
-    buttonText: 
+    buttonText: "\uC774\uB3D9\uD55C\uB2E4"
     effects:
     - effectType: 1
       value: 1
     - effectType: 2
       value: 1
   - optionText: "\uB3C4\uB9DD\uAC04\uB2E4"
-    buttonText: 
+    buttonText: "\uB3C4\uB9DD\uAC04\uB2E4"
     effects:
     - effectType: 0
       value: -1
     - effectType: 2
-      value: 1
+      value: 2

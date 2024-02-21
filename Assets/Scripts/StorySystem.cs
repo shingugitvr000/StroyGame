@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;               //UI를 컨트롤 할 것이라서 추가
 using TMPro;                        // TextMeshPro를 사용하기 위해 필요
 using UnityEngine;
+using System;
 
 public class StorySystem : MonoBehaviour
 {
@@ -20,15 +21,12 @@ public class StorySystem : MonoBehaviour
     public float delay = 0.1f;                  // 각 글자가 나타나는 데 걸리는 시간
     public string fullText;                     // 전체 표시할 텍스트
     private string currentText = "";            // 현재까지 표시된 텍스트
-    public TMP_Text textComponent;             // TextMeshPro 컴포넌트
+    public TMP_Text textComponent;              // TextMeshPro 컴포넌트
+    public TMP_Text storyIndex;                 // storyIndex 
 
-    public TMP_Text way01;
-    public TMP_Text way02;
-    public TMP_Text way03;
+    public Button[] buttonWay = new Button[3];
+    public TMP_Text[] buttonWayText = new TMP_Text[3];
 
-    public Button buttonWay01;
-    public Button buttonWay02;
-    public Button buttonWay03;
 
 
     private void Awake()
@@ -38,21 +36,42 @@ public class StorySystem : MonoBehaviour
 
     private void Start()
     {
-        buttonWay01.onClick.AddListener(OnWay01Click);
-        buttonWay02.onClick.AddListener(OnWay02Click);
-        buttonWay03.onClick.AddListener(OnWay03Click);
+        for (int i = 0; i < buttonWay.Length; i++)
+        {
+            int wayIndex = i; //클로저(closure) 문제를 해결
+            // 클로저 문제란 람다식 또는 익명 함수가 외부 변수를 캡처할 때 발생하는 문제
+            buttonWay[i].onClick.AddListener(() => OnWayClick(wayIndex));
+        }
     }
+
 
     public void StoryModelInit()
     {
         fullText = currentStoryModel.storyText;
-        way01.text = currentStoryModel.options[0].buttonText;
-        way02.text = currentStoryModel.options[1].buttonText;
+
+        storyIndex.text = currentStoryModel.storyNumber.ToString();
+
+        for (int i = 0; i < currentStoryModel.options.Length; i++)
+        {
+            buttonWayText[i].text = currentStoryModel.options[i].buttonText;
+        }        
     }
 
     public void CoShowText()
     {
+        StoryModelInit();
+        ResetShow();
         StartCoroutine(ShowText());
+    }
+
+    public void ResetShow()
+    {
+        textComponent.text = "";
+
+        for (int i = 0; i < buttonWay.Length; i++)
+        {
+            buttonWay[i].gameObject.SetActive(false);
+        }
     }
 
     IEnumerator ShowText()
@@ -63,25 +82,23 @@ public class StorySystem : MonoBehaviour
             textComponent.text = currentText;
             yield return new WaitForSeconds(delay);
         }
+
+        for (int i = 0; i < currentStoryModel.options.Length; i++)
+        {
+            buttonWay[i].gameObject.SetActive(true); 
+            yield return new WaitForSeconds(delay);
+        }
+
+        yield return new WaitForSeconds(delay);
     }
 
-    // 버튼 리스너들
-    public void OnWay01Click()
+    public void OnWayClick(int index)
     {
-        for(int i = 0; i < currentStoryModel.options[0].effects.Length; i++)
+        for(int i = 0; i < currentStoryModel.options[index].effects.Length; i++)
         {
-            GameSystem.Instance.ApplyEffect(currentStoryModel.options[0].effects[i]);
+            GameSystem.Instance.ApplyEffect(currentStoryModel.options[index].effects[i]);
         }
     }
 
-    public void OnWay02Click()
-    {
-       
-    }
-
-    public void OnWay03Click()
-    {
-      
-    }
 
 }
