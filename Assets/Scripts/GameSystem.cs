@@ -44,10 +44,12 @@ public class GameSystem : MonoBehaviour
 
     //체력와 정신력
     public int hpPoint;
-    public int mpPoint;
+    public int spPoint;
 
     public int currentHpPoint;
-    public int currentMpPoint;
+    public int currentSpPoint;
+
+    public int currentXpPoint;
 
     //기본 스텟 설정
     public int strength;            //STR
@@ -80,11 +82,13 @@ public class GameSystem : MonoBehaviour
     {
         switch (effect.effectType)
         {
-            case StoryModel.Effect.EffectType.AddHealth:
+            case StoryModel.Effect.EffectType.ChangeHp:
                 currentHpPoint += effect.value;
+                GameUI.Instance.UpdateHpUI();
                 break;
             case StoryModel.Effect.EffectType.AddExperience:
-                
+                currentXpPoint += effect.value;
+                GameUI.Instance.UpdateXpUI();
                 break;
             case StoryModel.Effect.EffectType.GoToNextStory:
                 currentStoryIndex = effect.value;

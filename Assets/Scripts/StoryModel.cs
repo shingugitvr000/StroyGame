@@ -25,9 +25,13 @@ public class StoryModel : ScriptableObject
     {
         public enum EffectType
         {
-            AddHealth,
+            ChangeHp,
+            ChangeSp,
             AddExperience,
-            GoToNextStory
+            GoToBattle,
+            GoToShop,
+            GoToNextStory,
+            GoToEnding
         }
 
         public EffectType effectType;
