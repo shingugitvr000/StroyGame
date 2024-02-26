@@ -11,6 +11,8 @@ public class StoryModel : ScriptableObject
     public string storyText;
 
     public Option[] options; // 선택지 배열
+    public bool showOptions = false; // 기본적으로는 false로 설정
+
 
     [System.Serializable]
     public class Option
