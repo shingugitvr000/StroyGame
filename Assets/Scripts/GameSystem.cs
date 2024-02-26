@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System.Text;
 
 #if UNITY_EDITOR
 [CustomEditor(typeof(GameSystem))]
@@ -42,6 +43,10 @@ public class GameSystem : MonoBehaviour
         ENDMODE
     }
 
+    //=========================================================================================
+    // 스텟
+    //=========================================================================================
+
     //체력와 정신력
     public int hpPoint;
     public int spPoint;
@@ -61,6 +66,27 @@ public class GameSystem : MonoBehaviour
 
 
     public GAMESTATE currentState;
+
+    //=========================================================================================
+    // 전투 
+    //=========================================================================================
+
+    // 공격 수식 상수
+    private const int BASE_DAMAGE = 1; // 기본 피해량
+
+    private System.Random random = new System.Random(); // 랜덤 숫자 생성기
+
+    // 전투 수식 상수
+    private const int D20_MAX = 20;
+    private const int CRITICAL_HIT_THRESHOLD = 20;
+    private const int CRITICAL_HIT_MULTIPLIER = 2;
+
+    // 전투 로그를 저장할 StringBuilder 객체
+    private StringBuilder battleLog = new StringBuilder();
+
+    //=========================================================================================
+    // 스토리
+    //=========================================================================================
 
     public StoryModel[] storyModels;
     public int currentStoryIndex = 1;
@@ -134,6 +160,80 @@ public class GameSystem : MonoBehaviour
         }
 
         return tempStoryModels;
+    }
+
+    //=========================================================================================
+    // 전투 로그
+    //=========================================================================================
+
+    
+
+    // 전투 시작 시 호출되는 함수
+    public void StartBattle()
+    {
+        // 전투 로그 초기화
+        battleLog.Clear();
+        AppendToBattleLog("전투 시작!");
+
+        // 여기서 전투 로직을 구현하고, 전투 상황에 따라서 AppendToBattleLog 함수를 호출하여 로그를 기록합니다.
+        // 예를 들어,
+        // AppendToBattleLog("적이 공격했습니다!");
+        // AppendToBattleLog("플레이어가 반격했습니다!");
+
+        // 전투 종료 후 전투 로그 출력
+        Debug.Log(battleLog.ToString());
+    }
+
+    // 전투 로그에 내용 추가하는 함수
+    private void AppendToBattleLog(string log)
+    {
+        battleLog.AppendLine(log);
+    }
+
+    //=========================================================================================
+    // 전투
+    //=========================================================================================
+
+    public void Combat()
+    {
+        int attackRoll = RollD20(); // 공격 주사위 굴리기
+        int damage = 0;
+
+        if (attackRoll == D20_MAX) // 20이 나오면 크리티컬 히트
+        {
+            damage = RollDice(1, 6) * CRITICAL_HIT_MULTIPLIER;
+            AppendToBattleLog("크리티컬 히트!");
+        }
+        else
+        {
+            // 피해량 계산 (일반 공격)
+            damage = RollDice(1, 6);
+        }
+
+        // 피해량 적용 등 다른 전투 로직 처리
+        // 예를 들어,
+        // player.TakeDamage(damage);
+
+        // 전투 로그에 결과 추가
+        AppendToBattleLog($"공격 주사위 굴리기 결과: {attackRoll}");
+        AppendToBattleLog($"피해량: {damage}");
+    }
+
+    // D20 주사위를 굴려 결과를 반환하는 함수
+    private int RollD20()
+    {
+        return random.Next(1, D20_MAX + 1);
+    }
+
+    // 주사위를 numDice번 굴려 나온 값을 합산하여 반환하는 함수
+    private int RollDice(int numDice, int diceSides)
+    {
+        int total = 0;
+        for (int i = 0; i < numDice; i++)
+        {
+            total += random.Next(1, diceSides + 1);
+        }
+        return total;
     }
 
 }
