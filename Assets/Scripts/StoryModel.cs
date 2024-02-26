@@ -6,12 +6,21 @@ using UnityEngine;
 public class StoryModel : ScriptableObject
 {
     public int storyNumber;
+    
+    public enum STORYTYPE
+    {
+        MAIN,
+        SUB,
+        SERIAL
+    }
+
+    public STORYTYPE storytype;
+
     public bool storyDone;
 
     public string storyText;
 
     public Option[] options; // 선택지 배열
-    public bool showOptions = false; // 기본적으로는 false로 설정
 
 
     [System.Serializable]
@@ -19,13 +28,36 @@ public class StoryModel : ScriptableObject
     {
         public string optionText;
         public string buttonText; // 선택지 버튼의 이름
-        public Effect[] effects; // 선택지에 대한 효과 배열
+
+        public Check check;
     }
 
     [System.Serializable]
-    public class Effect
+    public class Check
     {
-        public enum EffectType
+        public int checkvalue;
+        public enum CheckType : int
+        {
+            NONE,
+            CheckSTR,
+            CheckDEX,
+            CheckCON,
+            CheckINT,
+            CheckWIS,
+            CheckCHA
+
+        }
+
+        public CheckType checkType;
+
+        public Result[] sucessResult; // 선택지에 대한 효과 배열
+        public Result[] failResult; // 선택지에 대한 효과 배열
+    }
+
+    [System.Serializable]
+    public class Result
+    {
+        public enum ResultType : int
         {
             ChangeHp,
             ChangeSp,
@@ -33,21 +65,23 @@ public class StoryModel : ScriptableObject
             GoToBattle,
             GoToShop,
             GoToNextStory,
-            GoToEnding
+            GoToRandomStory,
+            GoToEnding 
         }
 
-        public EffectType effectType;
+        public ResultType resultType;
         public int value;
+        public Stats stats;
     }
 
-    // 선택지를 선택할 때 영향을 주는 메서드
-    public void ApplyEffects(int optionIndex, GameSystem gameSystem)
-    {
-        foreach (Effect effect in options[optionIndex].effects)
-        {
-            gameSystem.ApplyEffect(effect);
-        }
-    }
+    //// 선택지를 선택할 때 영향을 주는 메서드
+    //public void ApplyChoice(int optionIndex, GameSystem gameSystem)
+    //{
+    //    foreach (Choice choice in options[optionIndex].choices)
+    //    {
+    //        gameSystem.ApplyChoice(choice);
+    //    }
+    //}
 
 
 }

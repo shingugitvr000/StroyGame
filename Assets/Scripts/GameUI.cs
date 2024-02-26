@@ -27,26 +27,26 @@ public class GameUI : MonoBehaviour
 
     public void UpdateHpUI()
     {
-        HpPoint.text = "HP : " + GameSystem.Instance.currentHpPoint;
+        HpPoint.text = "HP : " + GameSystem.Instance.stats.currentHpPoint;
     }
 
     public void UpdateSpUI()
     {
-        SpPoint.text = "SP : " + GameSystem.Instance.currentSpPoint;
+        SpPoint.text = "SP : " + GameSystem.Instance.stats.currentSpPoint;
     }
 
     public void UpdateXpUI()
     {
-        XpPoint.text = "XP : " + GameSystem.Instance.currentXpPoint;
+        XpPoint.text = "XP : " + GameSystem.Instance.stats.currentXpPoint;
     }
 
     public void UpdateStats()
     {
-        STR.text = "STR : " + GameSystem.Instance.strength;
-        DEX.text = "DEX : " + GameSystem.Instance.dexterity;
-        CON.text = "CON : " + GameSystem.Instance.consitiution;
-        INT.text = "INT : " + GameSystem.Instance.Intelligence;
-        WIS.text = "WIS : " + GameSystem.Instance.wisdom;
-        CHA.text = "CHA : " + GameSystem.Instance.charisma;
+        STR.text = "STR : " + GameSystem.Instance.stats.strength;
+        DEX.text = "DEX : " + GameSystem.Instance.stats.dexterity;
+        CON.text = "CON : " + GameSystem.Instance.stats.consitiution;
+        INT.text = "INT : " + GameSystem.Instance.stats.Intelligence;
+        WIS.text = "WIS : " + GameSystem.Instance.stats.wisdom;
+        CHA.text = "CHA : " + GameSystem.Instance.stats.charisma;
     }
 }

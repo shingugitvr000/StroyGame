@@ -47,22 +47,9 @@ public class GameSystem : MonoBehaviour
     // 스텟
     //=========================================================================================
 
-    //체력와 정신력
-    public int hpPoint;
-    public int spPoint;
 
-    public int currentHpPoint;
-    public int currentSpPoint;
+    public Stats stats;
 
-    public int currentXpPoint;
-
-    //기본 스텟 설정
-    public int strength;            //STR
-    public int dexterity;           //DEX
-    public int consitiution;        //CON
-    public int Intelligence;        //INT
-    public int wisdom;              //WIS
-    public int charisma;            //CHA
 
 
     public GAMESTATE currentState;
@@ -104,23 +91,30 @@ public class GameSystem : MonoBehaviour
         ChangeState(GAMESTATE.STORYSHOW);
     }
 
-    public void ApplyEffect(StoryModel.Effect effect)
-    {
-        switch (effect.effectType)
+    public void ApplyChoice(StoryModel.Result result)
+    {       
+        switch (result.resultType)
         {
-            case StoryModel.Effect.EffectType.ChangeHp:
-                currentHpPoint += effect.value;
+            case StoryModel.Result.ResultType.ChangeHp:
+                stats.currentHpPoint += result.value;
                 GameUI.Instance.UpdateHpUI();
                 break;
-            case StoryModel.Effect.EffectType.AddExperience:
-                currentXpPoint += effect.value;
+
+            case StoryModel.Result.ResultType.AddExperience:
+                stats.currentXpPoint += result.value;
                 GameUI.Instance.UpdateXpUI();
                 break;
-            case StoryModel.Effect.EffectType.GoToNextStory:
-                currentStoryIndex = effect.value;
-                ChangeState(GAMESTATE.STORYSHOW);
 
+            case StoryModel.Result.ResultType.GoToNextStory:
+                currentStoryIndex = result.value;
+                ChangeState(GAMESTATE.STORYSHOW);
                 break;
+
+            case StoryModel.Result.ResultType.GoToRandomStory:
+                RandomStory();
+                ChangeState(GAMESTATE.STORYSHOW);
+                break;
+
             default:
                 Debug.LogError("Unknown effect type");
                 break;
@@ -144,6 +138,29 @@ public class GameSystem : MonoBehaviour
 
         StorySystem.Instance.currentStoryModel = tempStoryModels;
         StorySystem.Instance.CoShowText();
+    }
+
+    StoryModel RandomStory()
+    {
+        StoryModel tempStoryModels = null;
+
+        List<StoryModel> StoryModelList = new List<StoryModel>();
+
+        for (int i = 0; i < storyModels.Length; i++)
+        {
+            if (storyModels[i].storytype == StoryModel.STORYTYPE.MAIN)
+            {
+                StoryModelList.Add(storyModels[i]);              
+            }
+        }
+
+        tempStoryModels = StoryModelList[Random.Range(0, StoryModelList.Count)];
+
+        currentStoryIndex = tempStoryModels.storyNumber;
+
+        Debug.Log("currentStoryIndex" + currentStoryIndex);
+
+        return tempStoryModels;
     }
 
     StoryModel FindStoryModel(int number)

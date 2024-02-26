@@ -94,11 +94,67 @@ public class StorySystem : MonoBehaviour
 
     public void OnWayClick(int index)
     {
-        for(int i = 0; i < currentStoryModel.options[index].effects.Length; i++)
+        if(currentStoryModel.options[index].check.checkType == StoryModel.Check.CheckType.NONE)
         {
-            GameSystem.Instance.ApplyEffect(currentStoryModel.options[index].effects[i]);
+            for (int i = 0; i < currentStoryModel.options[index].check.sucessResult.Length; i++)
+            {
+                GameSystem.Instance.ApplyChoice(currentStoryModel.options[index].check.sucessResult[i]);
+            }
+        }
+
+        bool CheckValue = false;
+
+        if (currentStoryModel.options[index].check.checkType == StoryModel.Check.CheckType.CheckSTR)
+        {
+            if (UnityEngine.Random.Range(0, GameSystem.Instance.stats.strength) >= currentStoryModel.options[index].check.checkvalue)
+            {
+                CheckValue = true;
+            }           
+        }
+        else if (currentStoryModel.options[index].check.checkType == StoryModel.Check.CheckType.CheckDEX)
+        {
+            if (UnityEngine.Random.Range(0, GameSystem.Instance.stats.dexterity) >= currentStoryModel.options[index].check.checkvalue)
+            {
+                CheckValue = true;
+            }
+        }
+        else if (currentStoryModel.options[index].check.checkType == StoryModel.Check.CheckType.CheckCON)
+        {
+            if (UnityEngine.Random.Range(0, GameSystem.Instance.stats.consitiution) >= currentStoryModel.options[index].check.checkvalue)
+            {
+                CheckValue = true;
+            }
+        }
+        else if (currentStoryModel.options[index].check.checkType == StoryModel.Check.CheckType.CheckINT)
+        {
+            if (UnityEngine.Random.Range(0, GameSystem.Instance.stats.Intelligence) >= currentStoryModel.options[index].check.checkvalue)
+            {
+                CheckValue = true;
+            }
+        }
+        else if (currentStoryModel.options[index].check.checkType == StoryModel.Check.CheckType.CheckCHA)
+        {
+            if (UnityEngine.Random.Range(0, GameSystem.Instance.stats.charisma) >= currentStoryModel.options[index].check.checkvalue)
+            {
+                CheckValue = true;
+            }
+        }
+
+
+        if (CheckValue)
+        {
+            for (int i = 0; i < currentStoryModel.options[index].check.sucessResult.Length; i++)
+            {
+                GameSystem.Instance.ApplyChoice(currentStoryModel.options[index].check.sucessResult[i]);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < currentStoryModel.options[index].check.failResult.Length; i++)
+            {
+                GameSystem.Instance.ApplyChoice(currentStoryModel.options[index].check.failResult[i]);
+            }
         }
     }
-
 
 }
