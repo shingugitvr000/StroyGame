@@ -19,14 +19,14 @@ MonoBehaviour:
   - optionText: "\uC774\uB3D9\uD55C\uB2E4"
     buttonText: "\uC774\uB3D9\uD55C\uB2E4"
     effects:
-    - effectType: 1
+    - effectType: 0
       value: 1
-    - effectType: 2
-      value: 1
+    - effectType: 5
+      value: 3
   - optionText: "\uB3C4\uB9DD\uAC04\uB2E4"
     buttonText: "\uB3C4\uB9DD\uAC04\uB2E4"
     effects:
     - effectType: 0
       value: -1
-    - effectType: 2
+    - effectType: 5
       value: 2

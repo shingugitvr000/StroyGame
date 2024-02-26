@@ -19,7 +19,7 @@ MonoBehaviour:
   - optionText: "\uC774\uB3D9\uD55C\uB2E4"
     buttonText: 
     effects:
-    - effectType: 1
+    - effectType: 0
       value: 1
     - effectType: 2
       value: 1
@@ -28,5 +28,5 @@ MonoBehaviour:
     effects:
     - effectType: 0
       value: -1
-    - effectType: 2
+    - effectType: 0
       value: 3
