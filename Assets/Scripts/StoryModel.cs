@@ -29,16 +29,17 @@ public class StoryModel : ScriptableObject
         public string optionText;
         public string buttonText; // 선택지 버튼의 이름
 
-        public Check check;
+        public EventCheck eventCheck;
     }
 
     [System.Serializable]
-    public class Check
+    public class EventCheck
     {
         public int checkvalue;
-        public enum CheckType : int
+        public enum EventType : int
         {
             NONE,
+            GoToBattle,
             CheckSTR,
             CheckDEX,
             CheckCON,
@@ -48,7 +49,7 @@ public class StoryModel : ScriptableObject
 
         }
 
-        public CheckType checkType;
+        public EventType eventType;
 
         public Result[] sucessResult; // 선택지에 대한 효과 배열
         public Result[] failResult; // 선택지에 대한 효과 배열
@@ -62,7 +63,6 @@ public class StoryModel : ScriptableObject
             ChangeHp,
             ChangeSp,
             AddExperience,
-            GoToBattle,
             GoToShop,
             GoToNextStory,
             GoToRandomStory,
@@ -73,15 +73,5 @@ public class StoryModel : ScriptableObject
         public int value;
         public Stats stats;
     }
-
-    //// 선택지를 선택할 때 영향을 주는 메서드
-    //public void ApplyChoice(int optionIndex, GameSystem gameSystem)
-    //{
-    //    foreach (Choice choice in options[optionIndex].choices)
-    //    {
-    //        gameSystem.ApplyChoice(choice);
-    //    }
-    //}
-
 
 }
