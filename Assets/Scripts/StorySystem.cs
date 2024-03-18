@@ -9,7 +9,7 @@ public class StorySystem : MonoBehaviour
 {
     public static StorySystem Instance;                 //∞£¥‹«— ΩÃ±€≈Ê »≠
 
-    public StoryModel currentStoryModel;
+    public StoryTableObject currentStoryModel;
 
     public enum TEXTSYSTEM    
     {
@@ -94,7 +94,7 @@ public class StorySystem : MonoBehaviour
 
     public void OnWayClick(int index)
     {
-        if(currentStoryModel.options[index].eventCheck.eventType == StoryModel.EventCheck.EventType.NONE)
+        if(currentStoryModel.options[index].eventCheck.eventType == StoryTableObject.EventCheck.EventType.NONE)
         {
             for (int i = 0; i < currentStoryModel.options[index].eventCheck.sucessResult.Length; i++)
             {
@@ -104,37 +104,37 @@ public class StorySystem : MonoBehaviour
 
         bool CheckValue = false;
 
-        if (currentStoryModel.options[index].eventCheck.eventType == StoryModel.EventCheck.EventType.CheckSTR)
+        if (currentStoryModel.options[index].eventCheck.eventType == StoryTableObject.EventCheck.EventType.CheckSTR)
         {
-            if (UnityEngine.Random.Range(0, GameSystem.Instance.stats.strength) >= currentStoryModel.options[index].eventCheck.checkvalue)
+            if (UnityEngine.Random.Range(0, GameSystem.Instance.statsTalbeOject.statsData.strength) >= currentStoryModel.options[index].eventCheck.checkvalue)
             {
                 CheckValue = true;
             }           
         }
-        else if (currentStoryModel.options[index].eventCheck.eventType == StoryModel.EventCheck.EventType.CheckDEX)
+        else if (currentStoryModel.options[index].eventCheck.eventType == StoryTableObject.EventCheck.EventType.CheckDEX)
         {
-            if (UnityEngine.Random.Range(0, GameSystem.Instance.stats.dexterity) >= currentStoryModel.options[index].eventCheck.checkvalue)
+            if (UnityEngine.Random.Range(0, GameSystem.Instance.statsTalbeOject.statsData.dexterity) >= currentStoryModel.options[index].eventCheck.checkvalue)
             {
                 CheckValue = true;
             }
         }
-        else if (currentStoryModel.options[index].eventCheck.eventType == StoryModel.EventCheck.EventType.CheckCON)
+        else if (currentStoryModel.options[index].eventCheck.eventType == StoryTableObject.EventCheck.EventType.CheckCON)
         {
-            if (UnityEngine.Random.Range(0, GameSystem.Instance.stats.consitiution) >= currentStoryModel.options[index].eventCheck.checkvalue)
+            if (UnityEngine.Random.Range(0, GameSystem.Instance.statsTalbeOject.statsData.consitiution) >= currentStoryModel.options[index].eventCheck.checkvalue)
             {
                 CheckValue = true;
             }
         }
-        else if (currentStoryModel.options[index].eventCheck.eventType == StoryModel.EventCheck.EventType.CheckINT)
+        else if (currentStoryModel.options[index].eventCheck.eventType == StoryTableObject.EventCheck.EventType.CheckINT)
         {
-            if (UnityEngine.Random.Range(0, GameSystem.Instance.stats.Intelligence) >= currentStoryModel.options[index].eventCheck.checkvalue)
+            if (UnityEngine.Random.Range(0, GameSystem.Instance.statsTalbeOject.statsData.Intelligence) >= currentStoryModel.options[index].eventCheck.checkvalue)
             {
                 CheckValue = true;
             }
         }
-        else if (currentStoryModel.options[index].eventCheck.eventType == StoryModel.EventCheck.EventType.CheckCHA)
+        else if (currentStoryModel.options[index].eventCheck.eventType == StoryTableObject.EventCheck.EventType.CheckCHA)
         {
-            if (UnityEngine.Random.Range(0, GameSystem.Instance.stats.charisma) >= currentStoryModel.options[index].eventCheck.checkvalue)
+            if (UnityEngine.Random.Range(0, GameSystem.Instance.statsTalbeOject.statsData.charisma) >= currentStoryModel.options[index].eventCheck.checkvalue)
             {
                 CheckValue = true;
             }

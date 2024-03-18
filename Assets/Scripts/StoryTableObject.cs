@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewStory", menuName = "ScriptableObjects/StoryModel")]
-public class StoryModel : ScriptableObject
+[CreateAssetMenu(fileName = "NewStory", menuName = "ScriptableObjects/StoryTableObject")]
+public class StoryTableObject : ScriptableObject
 {
     public int storyNumber;
     

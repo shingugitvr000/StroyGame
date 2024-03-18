@@ -27,26 +27,26 @@ public class GameUI : MonoBehaviour
 
     public void UpdateHpUI()
     {
-        HpPoint.text = "HP : " + GameSystem.Instance.stats.currentHpPoint;
+        HpPoint.text = "HP : " + GameSystem.Instance.statsTalbeOject.statsData.currentHpPoint;
     }
 
     public void UpdateSpUI()
     {
-        SpPoint.text = "SP : " + GameSystem.Instance.stats.currentSpPoint;
+        SpPoint.text = "SP : " + GameSystem.Instance.statsTalbeOject.statsData.currentSpPoint;
     }
 
     public void UpdateXpUI()
     {
-        XpPoint.text = "XP : " + GameSystem.Instance.stats.currentXpPoint;
+        XpPoint.text = "XP : " + GameSystem.Instance.statsTalbeOject.statsData.currentXpPoint;
     }
 
     public void UpdateStats()
     {
-        STR.text = "STR : " + GameSystem.Instance.stats.strength;
-        DEX.text = "DEX : " + GameSystem.Instance.stats.dexterity;
-        CON.text = "CON : " + GameSystem.Instance.stats.consitiution;
-        INT.text = "INT : " + GameSystem.Instance.stats.Intelligence;
-        WIS.text = "WIS : " + GameSystem.Instance.stats.wisdom;
-        CHA.text = "CHA : " + GameSystem.Instance.stats.charisma;
+        STR.text = "STR : " + GameSystem.Instance.statsTalbeOject.statsData.strength;
+        DEX.text = "DEX : " + GameSystem.Instance.statsTalbeOject.statsData.dexterity;
+        CON.text = "CON : " + GameSystem.Instance.statsTalbeOject.statsData.consitiution;
+        INT.text = "INT : " + GameSystem.Instance.statsTalbeOject.statsData.Intelligence;
+        WIS.text = "WIS : " + GameSystem.Instance.statsTalbeOject.statsData.wisdom;
+        CHA.text = "CHA : " + GameSystem.Instance.statsTalbeOject.statsData.charisma;
     }
 }

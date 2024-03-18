@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(StoryModel))]
+[CustomEditor(typeof(StoryTableObject))]
 public class StoryModelEditor : Editor
 {
     public override void OnInspectorGUI()
@@ -9,7 +9,7 @@ public class StoryModelEditor : Editor
         // 기본 스크립터블 오브젝트 필드 표시
         base.OnInspectorGUI();
 
-        StoryModel storyModel = (StoryModel)target;
+        StoryTableObject storyModel = (StoryTableObject)target;
 
         // 변경 사항이 있을 때 저장
         if (GUI.changed)
